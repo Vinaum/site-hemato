@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
-import { doctor } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 import { about } from "@/content/pages";
 import PhotoPlaceholder from "@/components/ui/PhotoPlaceholder";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-export const metadata: Metadata = {
-  title: `Sobre | ${doctor.name}`,
+export const metadata = pageMetadata({
+  title: "Sobre",
   description: "[PREENCHER: descrição da página Sobre]",
-};
+  path: "/sobre/",
+});
 
 export default function SobrePage() {
   return (

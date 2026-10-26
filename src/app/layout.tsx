@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ContactBar from "@/components/layout/ContactBar";
+import { doctor } from "@/content/site";
+import { ALLOW_INDEXING } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,17 +20,26 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "[PREENCHER: nome do médico] | Hematologista",
+  title: {
+    default: `${doctor.name} | Hematologista`,
+    template: `%s | ${doctor.name}`,
+  },
   description: "[PREENCHER: descrição do site]",
-  // REMOVER na Fase 5, depois de substituir todos os placeholders por conteúdo real.
-  robots: { index: false, follow: false },
+  // Indexação só é liberada via NEXT_PUBLIC_ALLOW_INDEXING=true (Fase 5).
+  robots: ALLOW_INDEXING
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" data-scroll-behavior="smooth" className={`${inter.variable} ${fraunces.variable}`}>
+    <html
+      lang="pt-BR"
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${fraunces.variable}`}
+    >
       <body className="pb-24 md:pb-0">
         <a
           href="#conteudo"

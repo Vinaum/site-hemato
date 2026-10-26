@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import { doctor } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 import { privacySections } from "@/content/pages";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-export const metadata: Metadata = {
-  title: `Política de privacidade | ${doctor.name}`,
+export const metadata = pageMetadata({
+  title: "Política de privacidade",
   description: "[PREENCHER: descrição da política de privacidade]",
-};
+  path: "/privacidade/",
+});
 
 export default function PrivacidadePage() {
   return (

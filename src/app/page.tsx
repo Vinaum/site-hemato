@@ -1,5 +1,4 @@
-import type { Metadata } from "next";
-import { doctor } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 import { home, specialties } from "@/content/pages";
 import { getContactLinks } from "@/lib/contact";
 import ButtonLink from "@/components/ui/ButtonLink";
@@ -8,10 +7,10 @@ import PhotoPlaceholder from "@/components/ui/PhotoPlaceholder";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-export const metadata: Metadata = {
-  title: `${doctor.name} | Hematologista`,
+export const metadata = pageMetadata({
   description: "[PREENCHER: descrição da página inicial, até 160 caracteres]",
-};
+  path: "/",
+});
 
 export default function Home() {
   const links = getContactLinks();

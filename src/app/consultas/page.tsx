@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { contact, doctor } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
+import { contact } from "@/content/site";
 import { consultations } from "@/content/pages";
 import { getContactLinks } from "@/lib/contact";
 import ButtonLink from "@/components/ui/ButtonLink";
@@ -7,10 +7,11 @@ import Card from "@/components/ui/Card";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-export const metadata: Metadata = {
-  title: `Consultas | ${doctor.name}`,
+export const metadata = pageMetadata({
+  title: "Consultas",
   description: "[PREENCHER: descrição da página Consultas]",
-};
+  path: "/consultas/",
+});
 
 export default function ConsultasPage() {
   const links = getContactLinks();

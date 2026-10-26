@@ -22,3 +22,9 @@ export function withBase(path: string): string {
   const normalized = path.startsWith("/") ? path : `/${path}`;
   return `${BASE_PATH}${normalized}`;
 }
+
+/**
+ * Controle de indexação. Mantido falso até a publicação com conteúdo real:
+ * enquanto falso, o <meta robots> e o robots.txt pedem que nada seja indexado.
+ */
+export const ALLOW_INDEXING = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";

@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
-import { doctor } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 import { specialties } from "@/content/pages";
 import Card from "@/components/ui/Card";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-export const metadata: Metadata = {
-  title: `Áreas de atuação | ${doctor.name}`,
+export const metadata = pageMetadata({
+  title: "Áreas de atuação",
   description: "[PREENCHER: descrição da página Áreas de atuação]",
-};
+  path: "/atuacao/",
+});
 
 export default function AtuacaoPage() {
   return (
