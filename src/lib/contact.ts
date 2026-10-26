@@ -21,9 +21,11 @@ export function telUrl(number: string): string | null {
  * Links de contato para os botões. Enquanto os dados forem placeholders,
  * apontam para /consultas/ (rota interna; o <Link> aplica o basePath).
  */
-export function getContactLinks() {
-  const wa = whatsappUrl(contact.whatsapp, contact.whatsappMessage);
-  const tel = telUrl(contact.phone);
+export function getContactLinks(
+  source: Pick<typeof contact, "whatsapp" | "whatsappMessage" | "phone"> = contact,
+) {
+  const wa = whatsappUrl(source.whatsapp, source.whatsappMessage);
+  const tel = telUrl(source.phone);
   return {
     whatsapp: wa ?? "/consultas/",
     phone: tel ?? "/consultas/",
