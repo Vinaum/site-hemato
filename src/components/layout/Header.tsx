@@ -30,7 +30,7 @@ export default function Header() {
       <Container className="relative flex h-18 items-center justify-between gap-4">
         <Link
           href="/"
-          className="font-serif text-xl font-semibold text-primary-dark"
+          className="font-serif text-lg font-semibold leading-tight text-primary-dark md:text-xl"
         >
           {doctor.name}
         </Link>
@@ -58,9 +58,9 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <ButtonLink href={links.whatsapp} className="hidden md:inline-flex">
-            Agendar pelo WhatsApp
-          </ButtonLink>
+          <div className="hidden md:block">
+            <ButtonLink href={links.whatsapp}>Agendar pelo WhatsApp</ButtonLink>
+          </div>
 
           <button
             type="button"

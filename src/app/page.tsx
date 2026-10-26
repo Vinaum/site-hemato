@@ -1,43 +1,81 @@
-import { withBase } from "@/lib/site";
+import type { Metadata } from "next";
+import { doctor } from "@/content/site";
+import { home, specialties } from "@/content/pages";
+import { getContactLinks } from "@/lib/contact";
+import ButtonLink from "@/components/ui/ButtonLink";
+import Card from "@/components/ui/Card";
+import PhotoPlaceholder from "@/components/ui/PhotoPlaceholder";
+import Section from "@/components/ui/Section";
+import SectionHeading from "@/components/ui/SectionHeading";
 
-const swatches = [
-  { nome: "primary", classe: "bg-primary" },
-  { nome: "primary-dark", classe: "bg-primary-dark" },
-  { nome: "bronze", classe: "bg-bronze" },
-  { nome: "bronze-light", classe: "bg-bronze-light" },
-  { nome: "sage", classe: "bg-sage" },
-  { nome: "surface", classe: "bg-surface border border-line" },
-];
+export const metadata: Metadata = {
+  title: `${doctor.name} | Hematologista`,
+  description: "[PREENCHER: descrição da página inicial, até 160 caracteres]",
+};
 
-// PÁGINA TEMPORÁRIA: valida tokens, fontes e basePath. Será substituída no próximo lote.
 export default function Home() {
+  const links = getContactLinks();
+
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16">
-      <h1 className="text-4xl md:text-5xl">[PREENCHER: nome do médico]</h1>
-      <p className="mt-4 max-w-prose">
-        Teste de tipografia e cores. Este texto usa a cor <code>ink</code> sobre
-        o fundo <code>background</code>.
-      </p>
+    <>
+      <Section>
+        <div className="grid items-center gap-12 md:grid-cols-2">
+          <div>
+            <h1 className="text-4xl md:text-5xl">{home.heroTitle}</h1>
+            <p className="mt-6 max-w-prose text-lg">{home.heroText}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <ButtonLink href={links.whatsapp}>Agendar pelo WhatsApp</ButtonLink>
+              <ButtonLink href="/atuacao/" variant="secondary">
+                Áreas de atuação
+              </ButtonLink>
+            </div>
+          </div>
+          <PhotoPlaceholder className="mx-auto w-full max-w-sm md:max-w-none" />
+        </div>
+      </Section>
 
-      <a
-        href="#conteudo"
-        className="mt-8 inline-block rounded-md bg-primary px-6 py-3 font-medium text-surface transition-colors hover:bg-primary-dark"
-      >
-        Botão primário
-      </a>
+      <Section tone="sage" labelledBy="atuacao-titulo">
+        <SectionHeading id="atuacao-titulo" title="Áreas de atuação" />
+        <ul className="grid gap-6 md:grid-cols-3">
+          {specialties.map((s) => (
+            <li key={s.title}>
+              <Card>
+                <h3 className="text-xl">{s.title}</h3>
+                <p className="mt-3">{s.text}</p>
+              </Card>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-10">
+          <ButtonLink href="/atuacao/" variant="secondary">
+            Ver todas as áreas
+          </ButtonLink>
+        </div>
+      </Section>
 
-      <ul className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3">
-        {swatches.map((s) => (
-          <li key={s.nome}>
-            <div className={`h-16 rounded-md ${s.classe}`} />
-            <span className="text-sm">{s.nome}</span>
-          </li>
-        ))}
-      </ul>
+      <Section labelledBy="sobre-titulo">
+        <SectionHeading id="sobre-titulo" title="Sobre" />
+        <p className="max-w-prose text-lg">{home.aboutText}</p>
+        <div className="mt-8">
+          <ButtonLink href="/sobre/" variant="secondary">
+            Conhecer a trajetória
+          </ButtonLink>
+        </div>
+      </Section>
 
-      <p className="mt-12 text-sm">Teste do helper withBase (favicon abaixo):</p>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={withBase("/favicon.ico")} width={32} height={32} alt="" />
-    </div>
+      <Section tone="surface" labelledBy="contato-titulo">
+        <SectionHeading
+          id="contato-titulo"
+          title="Agende sua consulta"
+          intro="O agendamento é feito por WhatsApp ou telefone."
+        />
+        <div className="flex flex-wrap gap-3">
+          <ButtonLink href={links.whatsapp}>Agendar pelo WhatsApp</ButtonLink>
+          <ButtonLink href={links.phone} variant="secondary">
+            Ligar
+          </ButtonLink>
+        </div>
+      </Section>
+    </>
   );
 }
