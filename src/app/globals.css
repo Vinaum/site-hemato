@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* Tokens de design. "inline" é necessário para as fontes, que são
+   variáveis CSS definidas pelo next/font no elemento <html>. */
+@theme inline {
+  --color-primary: #146b4c;
+  --color-primary-dark: #0d3f30;
+  --color-bronze: #8c7558; /* decorativo; não usar em texto pequeno (contraste 4,0 a 4,4) */
+  --color-bronze-light: #d5c8b3;
+  --color-background: #f6f4ee;
+  --color-surface: #ffffff;
+  --color-sage: #dce9e1;
+  --color-ink: #343b37;
+  --color-line: #dde3de; /* divisor decorativo; não serve como borda de campo */
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    color: var(--color-primary-dark);
+    line-height: 1.2;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+}
