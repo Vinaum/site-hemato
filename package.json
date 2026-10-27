@@ -1,0 +1,34 @@
+{
+  "name": "site-hematologista",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "check:placeholders": "node scripts/check-placeholders.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build:e2e": "NEXT_PUBLIC_BASE_PATH=/site-hematologista NEXT_PUBLIC_SITE_URL=http://localhost:4173/site-hematologista next build",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "next": "16.4.3",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.3",
+    "postcss": "^8.5.32",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^5.0.5"
+  }
+}
