@@ -24,7 +24,8 @@ export const metadata: Metadata = {
     default: `${doctor.name} | Hematologista`,
     template: `%s | ${doctor.name}`,
   },
-  description: "[PREENCHER: descrição do site]",
+  description:
+    "Dr. Marco Aurélio Sartori, médico hematologista. Formado pela FMUSP, com residência no Hospital das Clínicas em Clínica Médica e em Hematologia e Hemoterapia.",
   // Indexação só é liberada via NEXT_PUBLIC_ALLOW_INDEXING=true (Fase 5).
   robots: ALLOW_INDEXING
     ? { index: true, follow: true }

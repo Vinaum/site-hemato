@@ -1,22 +1,31 @@
-
-name: Deploy site to GitHub Pages
+name: Verificar e publicar no GitHub Pages
 
 on:
   push:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      allow_placeholders:
+        description: "Publicar mesmo com [PREENCHER] (somente pré-visualização)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
 
 concurrency:
   group: github-pages
-  cancel-in-progress: true
+  cancel-in-progress: false
+
+env:
+  NEXT_TELEMETRY_DISABLED: "1"
 
 jobs:
-  build:
+  verify:
+    name: Qualidade e testes
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,7 +33,43 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript
+        run: npm run typecheck
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: Testes unitários
+        run: npm test
+
+      - name: Instalar Chromium para os testes
+        run: npx playwright install --with-deps chromium
+
+      - name: Build de teste (basePath simulado)
+        run: npm run build:e2e
+
+      - name: Testes de navegação
+        run: npm run test:e2e
+
+  build:
+    name: Build de produção
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Install dependencies
@@ -35,6 +80,11 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_PATH: /site-hemato
           NEXT_PUBLIC_SITE_URL: https://vinaum.github.io/site-hemato
+          NEXT_PUBLIC_ALLOW_INDEXING: "false"
+
+      - name: Bloquear publicação com placeholders
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.allow_placeholders) }}
+        run: npm run check:placeholders
 
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4
@@ -42,16 +92,16 @@ jobs:
           path: ./out
 
   deploy:
+    name: Publicar
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       pages: write
       id-token: write
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

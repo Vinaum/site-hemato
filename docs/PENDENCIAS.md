@@ -3,7 +3,7 @@
 Itens que dependem de dados reais ou de decisões do médico.
 
 ## Conteúdo (todos os `[PREENCHER: ...]`)
-- [ ] Nome, CRM-UF e número, RQE (confirmar se há RQE de Hematologia)
+- [x] Nome, CRM-SP e RQEs (130211 e 130210); conferir a grafia das especialidades com o registro no CRM-SP
 - [ ] Textos: início, sobre, áreas de atuação, consultas
 - [ ] Telefone, WhatsApp (somente dígitos com 55 + DDD), e-mail, endereço, horários
 - [ ] Foto profissional e versões otimizadas em `public/images/`

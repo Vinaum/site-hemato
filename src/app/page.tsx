@@ -1,6 +1,7 @@
-import { pageMetadata } from "@/lib/seo";
-import { home, specialties } from "@/content/pages";
+import { doctor } from "@/content/site";
+import { expertise, home } from "@/content/pages";
 import { getContactLinks } from "@/lib/contact";
+import { pageMetadata } from "@/lib/seo";
 import ButtonLink from "@/components/ui/ButtonLink";
 import Card from "@/components/ui/Card";
 import PhotoPlaceholder from "@/components/ui/PhotoPlaceholder";
@@ -8,7 +9,8 @@ import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 export const metadata = pageMetadata({
-  description: "[PREENCHER: descrição da página inicial, até 160 caracteres]",
+  description:
+    "Dr. Marco Aurélio Sartori, médico hematologista. Formado pela FMUSP, com residência no Hospital das Clínicas em Clínica Médica e em Hematologia e Hemoterapia.",
   path: "/",
 });
 
@@ -20,7 +22,8 @@ export default function Home() {
       <Section>
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div>
-            <h1 className="text-4xl md:text-5xl">{home.heroTitle}</h1>
+            <p className="font-medium text-primary">{home.kicker}</p>
+            <h1 className="mt-3 text-4xl md:text-5xl">{doctor.name}</h1>
             <p className="mt-6 max-w-prose text-lg">{home.heroText}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink href={links.whatsapp}>Agendar pelo WhatsApp</ButtonLink>
@@ -35,19 +38,18 @@ export default function Home() {
 
       <Section tone="sage" labelledBy="atuacao-titulo">
         <SectionHeading id="atuacao-titulo" title="Áreas de atuação" />
-        <ul className="grid gap-6 md:grid-cols-3">
-          {specialties.map((s) => (
-            <li key={s.title}>
+        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {expertise.map((area) => (
+            <li key={area}>
               <Card>
-                <h3 className="text-xl">{s.title}</h3>
-                <p className="mt-3">{s.text}</p>
+                <p className="font-serif text-xl text-primary-dark">{area}</p>
               </Card>
             </li>
           ))}
         </ul>
         <div className="mt-10">
           <ButtonLink href="/atuacao/" variant="secondary">
-            Ver todas as áreas
+            Ver condições acompanhadas
           </ButtonLink>
         </div>
       </Section>

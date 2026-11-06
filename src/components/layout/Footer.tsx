@@ -12,11 +12,14 @@ export default function Footer() {
       <Container className="grid gap-10 py-14 md:grid-cols-3">
         <div>
           <h2 className="font-serif text-xl text-surface">{doctor.name}</h2>
-          <p className="mt-3 text-bronze-light">
-            MÉDICO · {doctor.crm}
-            <br />
-            {doctor.specialty} · RQE {doctor.rqe}
-          </p>
+          <p className="mt-3 text-bronze-light">MÉDICO · {doctor.crm}</p>
+          <ul className="mt-1 text-bronze-light">
+            {doctor.specialties.map((s) => (
+              <li key={s.rqe}>
+                {s.title} · RQE {s.rqe}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div>

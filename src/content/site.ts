@@ -5,12 +5,14 @@
 export const ph = (label: string) => `[PREENCHER: ${label}]`;
 
 export const doctor = {
-  name: ph("nome do médico"),
-  // Exibido como: Nome · MÉDICO · CRM-UF 000000 (Resolução CFM 2.336/2023)
-  crm: ph("CRM-UF e número"),
-  // Só manter "Hematologia" se o médico tiver o RQE correspondente.
-  specialty: "Hematologia",
-  rqe: ph("número do RQE"),
+  name: "Dr. Marco Aurélio Sartori",
+  // Exibido no rodapé como: MÉDICO · CRM-SP 191256 (Resolução CFM 2.336/2023)
+  crm: "CRM-SP 191256",
+  // Grafia conforme informada pelo médico; conferir com o registro no CRM-SP.
+  specialties: [
+    { title: "Hematologista e Hemoterapeuta", rqe: "130211" },
+    { title: "Clínico Geral", rqe: "130210" },
+  ],
 };
 
 export const contact = {

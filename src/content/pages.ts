@@ -1,24 +1,64 @@
 import { ph } from "./site";
 
 export const home = {
-  heroTitle: ph("título principal da página inicial"),
-  heroText: ph("frase de apresentação, validada pelo médico"),
-  aboutText: ph("resumo da apresentação do médico"),
+  kicker: "Hematologia e Hemoterapia",
+  heroText:
+    "Médico formado pela Faculdade de Medicina da USP e especializado em Clínica Médica, Hematologia e Hemoterapia pelo Hospital das Clínicas da FMUSP.",
+  aboutText:
+    "Título de Especialista em Hematologia e Hemoterapia pela Associação Brasileira de Hematologia e Hemoterapia (ABHH), com atuação como preceptor da graduação e da residência médica na FMUSP.",
 };
-
-export const specialties = [
-  { title: ph("área de atuação 1"), text: ph("descrição da área 1") },
-  { title: ph("área de atuação 2"), text: ph("descrição da área 2") },
-  { title: ph("área de atuação 3"), text: ph("descrição da área 3") },
-];
 
 export const about = {
-  paragraphs: [
-    ph("trajetória profissional, parágrafo 1"),
-    ph("trajetória profissional, parágrafo 2"),
+  intro:
+    "Médico formado pela Faculdade de Medicina da USP e especializado em Clínica Médica, Hematologia e Hemoterapia pelo Hospital das Clínicas da Faculdade de Medicina da USP.",
+  certification:
+    "Título de Especialista em Hematologia e Hemoterapia pela Associação Brasileira de Hematologia e Hemoterapia (ABHH).",
+  // Mais recente primeiro.
+  training: [
+    {
+      institution: "Hospital das Clínicas (FMUSP)",
+      title: "Residência médica em Hematologia e Hemoterapia",
+      year: "2024",
+    },
+    {
+      institution: "Hospital das Clínicas (FMUSP)",
+      title: "Residência médica em Clínica Médica",
+      year: "2021",
+    },
+    {
+      institution: "Faculdade de Medicina da USP (FMUSP)",
+      title: "Medicina",
+      year: "2017",
+    },
   ],
-  education: [ph("formação 1"), ph("formação 2")],
+  teaching: [
+    "Médico Preceptor da Graduação da FMUSP em Clínica Médica (2021)",
+    "Médico Preceptor da Graduação e Residência em Hematologia e Hemoterapia (2024)",
+    "Ganhador de 2 Prêmios Ernesto de Souza Campos como Médico Preceptor mais votado pela Graduação da Universidade de São Paulo",
+  ],
 };
+
+export const expertise = [
+  "Hematologia",
+  "Hemoterapia",
+  "Onco-hematologia",
+  "Clínica Médica",
+];
+
+export const focusAreas = [
+  "Anemias",
+  "Plaquetas baixas (plaquetopenias)",
+  "Diminuição dos glóbulos brancos",
+  "Aumento de linfonodos (ínguas)",
+  "Aumento dos glóbulos vermelhos (eritrocitose)",
+  "Alterações no ferro e ferritina",
+  "Distúrbios de sangramento",
+  "Tromboses",
+  "Trombofilias",
+  "Mieloma múltiplo",
+  "Leucemias",
+  "Linfomas",
+];
 
 export const consultations = {
   modalities: ph("modalidades de atendimento"),
