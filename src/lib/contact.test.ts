@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { getContactLinks, isPlaceholder, telUrl, whatsappUrl } from "./contact";
+import {
+  getContactLinks,
+  isPlaceholder,
+  telUrl,
+  whatsappUrl,
+} from "./contact";
 
 describe("isPlaceholder", () => {
   it("detecta o marcador", () => {
@@ -9,13 +14,13 @@ describe("isPlaceholder", () => {
 });
 
 describe("whatsappUrl", () => {
-  it("monta o link com a mensagem codificada", () => {
+  it("monta o link com mensagem codificada", () => {
     expect(whatsappUrl("5511999990000", "Olá, tudo bem?")).toBe(
       "https://wa.me/5511999990000?text=Ol%C3%A1%2C%20tudo%20bem%3F",
     );
   });
 
-  it("aceita fixo (10 dígitos após o 55)", () => {
+  it("aceita telefone fixo", () => {
     expect(whatsappUrl("551133334444", "Oi")).not.toBeNull();
   });
 
@@ -29,29 +34,35 @@ describe("whatsappUrl", () => {
   ])("rejeita número %s", (_nome, numero) => {
     expect(whatsappUrl(numero, "Oi")).toBeNull();
   });
+
+  it("rejeita null", () => {
+    expect(whatsappUrl(null, "Oi")).toBeNull();
+  });
 });
 
 describe("telUrl", () => {
-  it("monta o link tel: com +", () => {
+  it("monta link tel:", () => {
     expect(telUrl("551133334444")).toBe("tel:+551133334444");
   });
 
-  it("rejeita número inválido", () => {
+  it("rejeita números inválidos", () => {
     expect(telUrl("[PREENCHER: telefone]")).toBeNull();
     expect(telUrl("1133334444")).toBeNull();
+    expect(telUrl(null)).toBeNull();
   });
 });
 
 describe("getContactLinks", () => {
-  it("usa /consultas/ enquanto os dados forem placeholders", () => {
+  it("não cria links quando os contatos estão indisponíveis", () => {
     const links = getContactLinks({
-      whatsapp: "[PREENCHER: WhatsApp]",
+      whatsapp: null,
       whatsappMessage: "Oi",
-      phone: "[PREENCHER: telefone]",
+      phone: null,
     });
+
     expect(links).toEqual({
-      whatsapp: "/consultas/",
-      phone: "/consultas/",
+      whatsapp: null,
+      phone: null,
       whatsappReady: false,
       phoneReady: false,
     });
@@ -63,6 +74,7 @@ describe("getContactLinks", () => {
       whatsappMessage: "Oi",
       phone: "551133334444",
     });
+
     expect(links).toEqual({
       whatsapp: "https://wa.me/5511999990000?text=Oi",
       phone: "tel:+551133334444",

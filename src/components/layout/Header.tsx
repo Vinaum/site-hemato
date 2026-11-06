@@ -58,9 +58,13 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <div className="hidden md:block">
-            <ButtonLink href={links.whatsapp}>Agendar pelo WhatsApp</ButtonLink>
-          </div>
+          {links.whatsappReady && links.whatsapp && (
+            <div className="hidden md:block">
+              <ButtonLink href={links.whatsapp}>
+                Agendar pelo WhatsApp
+              </ButtonLink>
+            </div>
+          )}
 
           <button
             type="button"

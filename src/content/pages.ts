@@ -1,4 +1,3 @@
-import { ph } from "./site";
 
 export const home = {
   kicker: "Hematologia e Hemoterapia",
@@ -61,8 +60,8 @@ export const focusAreas = [
 ];
 
 export const consultations = {
-  modalities: ph("modalidades de atendimento"),
-  guidance: ph("orientações para a consulta"),
+  modalities: "As informações sobre as modalidades de atendimento serão disponibilizadas em breve.",
+  guidance: "As orientações para a consulta serão disponibilizadas em breve.",
 };
 
 export const privacySections = [

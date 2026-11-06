@@ -16,14 +16,13 @@ export const doctor = {
 };
 
 export const contact = {
-  // Apenas dígitos, com DDI e DDD. Formato: 55 + DDD + número (10 ou 11 dígitos após o 55).
-  whatsapp: ph("WhatsApp, só dígitos com DDI 55 e DDD"),
+  whatsapp: null as string | null,
   whatsappMessage: "Olá, vim pelo site e gostaria de agendar uma consulta.",
-  phone: ph("telefone, só dígitos com DDI 55 e DDD"),
-  phoneDisplay: ph("telefone formatado"),
-  email: ph("e-mail"),
-  address: ph("endereço completo do consultório"),
-  hours: ph("horário de atendimento"),
+  phone: null as string | null,
+  phoneDisplay: null as string | null,
+  email: null as string | null,
+  address: null as string | null,
+  hours: null as string | null,
 };
 
 export const navItems = [

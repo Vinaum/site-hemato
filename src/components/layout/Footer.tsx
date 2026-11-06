@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { contact, doctor, navItems } from "@/content/site";
-import { getContactLinks, isPlaceholder } from "@/lib/contact";
+import { getContactLinks } from "@/lib/contact";
 import Container from "@/components/ui/Container";
 
 export default function Footer() {
@@ -24,30 +24,37 @@ export default function Footer() {
 
         <div>
           <h2 className="font-serif text-xl text-surface">Contato</h2>
+
           <ul className="mt-3 space-y-2 text-bronze-light">
-            <li>
-              {links.phoneReady ? (
-                <a href={links.phone} className="underline hover:text-surface">
+            {links.phoneReady && (
+              <li>
+                <a href={links.phone!} className="underline hover:text-surface">
                   {contact.phoneDisplay}
                 </a>
-              ) : (
-                contact.phone
-              )}
-            </li>
-            <li>
-              {isPlaceholder(contact.email) ? (
-                contact.email
-              ) : (
+              </li>
+            )}
+
+            {contact.email && (
+              <li>
                 <a
                   href={`mailto:${contact.email}`}
                   className="underline hover:text-surface"
                 >
                   {contact.email}
                 </a>
-              )}
-            </li>
-            <li>{contact.address}</li>
-            <li>{contact.hours}</li>
+              </li>
+            )}
+
+            {contact.address && <li>{contact.address}</li>}
+            {contact.hours && <li>{contact.hours}</li>}
+
+            {!links.phoneReady &&
+              !links.whatsappReady &&
+              !contact.email &&
+              !contact.address &&
+              !contact.hours && (
+            <li>Informações de contato serão disponibilizadas em breve.</li>
+            )}
           </ul>
         </div>
 

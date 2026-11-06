@@ -9,7 +9,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 
 export const metadata = pageMetadata({
   title: "Consultas",
-  description: "[PREENCHER: descrição da página Consultas]",
+  description: "Informações sobre atendimento, modalidades de consulta e orientações para agendamento com o Dr. Marco Aurélio Sartori, hematologista.",
   path: "/consultas/",
 });
 
@@ -22,13 +22,26 @@ export default function ConsultasPage() {
         <SectionHeading
           as="h1"
           title="Consultas"
-          intro="O agendamento é feito por WhatsApp ou telefone."
+          intro="Em breve, serão divulgadas informações sobre os canais de agendamento."
         />
         <div className="flex flex-wrap gap-3">
-          <ButtonLink href={links.whatsapp}>Agendar pelo WhatsApp</ButtonLink>
-          <ButtonLink href={links.phone} variant="secondary">
-            Ligar
-          </ButtonLink>
+          {links.whatsappReady && links.whatsapp && (
+            <ButtonLink href={links.whatsapp}>
+              Agendar pelo WhatsApp
+            </ButtonLink>
+          )}
+
+          {links.phoneReady && links.phone && (
+            <ButtonLink href={links.phone} variant="secondary">
+              Ligar
+            </ButtonLink>
+          )}
+
+          {!links.whatsappReady && !links.phoneReady && (
+            <p className="text-ink">
+              Os canais de agendamento serão disponibilizados em breve.
+            </p>
+          )}
         </div>
       </Section>
 

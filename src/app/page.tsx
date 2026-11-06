@@ -25,19 +25,27 @@ export default function Home() {
             <p className="font-medium text-primary">{home.kicker}</p>
             <h1 className="mt-3 text-4xl md:text-5xl">{doctor.name}</h1>
             <p className="mt-6 max-w-prose text-lg">{home.heroText}</p>
+
             <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href={links.whatsapp}>Agendar pelo WhatsApp</ButtonLink>
+              {links.whatsappReady && links.whatsapp && (
+                <ButtonLink href={links.whatsapp}>
+                  Agendar pelo WhatsApp
+                </ButtonLink>
+              )}
+
               <ButtonLink href="/atuacao/" variant="secondary">
                 Áreas de atuação
               </ButtonLink>
             </div>
           </div>
+
           <PhotoPlaceholder className="mx-auto w-full max-w-sm md:max-w-none" />
         </div>
       </Section>
 
       <Section tone="sage" labelledBy="atuacao-titulo">
         <SectionHeading id="atuacao-titulo" title="Áreas de atuação" />
+
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {expertise.map((area) => (
             <li key={area}>
@@ -47,6 +55,7 @@ export default function Home() {
             </li>
           ))}
         </ul>
+
         <div className="mt-10">
           <ButtonLink href="/atuacao/" variant="secondary">
             Ver condições acompanhadas
@@ -57,6 +66,7 @@ export default function Home() {
       <Section labelledBy="sobre-titulo">
         <SectionHeading id="sobre-titulo" title="Sobre" />
         <p className="max-w-prose text-lg">{home.aboutText}</p>
+
         <div className="mt-8">
           <ButtonLink href="/sobre/" variant="secondary">
             Conhecer a trajetória
@@ -68,13 +78,27 @@ export default function Home() {
         <SectionHeading
           id="contato-titulo"
           title="Agende sua consulta"
-          intro="O agendamento é feito por WhatsApp ou telefone."
+          intro="Conheça as informações sobre atendimento e agendamento."
         />
+
         <div className="flex flex-wrap gap-3">
-          <ButtonLink href={links.whatsapp}>Agendar pelo WhatsApp</ButtonLink>
-          <ButtonLink href={links.phone} variant="secondary">
-            Ligar
-          </ButtonLink>
+          {links.whatsappReady && links.whatsapp && (
+            <ButtonLink href={links.whatsapp}>
+              Agendar pelo WhatsApp
+            </ButtonLink>
+          )}
+
+          {links.phoneReady && links.phone && (
+            <ButtonLink href={links.phone} variant="secondary">
+              Ligar
+            </ButtonLink>
+          )}
+
+          {!links.whatsappReady && !links.phoneReady && (
+            <p className="text-ink">
+              Os canais de agendamento serão disponibilizados em breve.
+            </p>
+          )}
         </div>
       </Section>
     </>

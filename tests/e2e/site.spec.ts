@@ -55,37 +55,42 @@ test("menu móvel abre, mostra os links e fecha com Esc", async ({ page, isMobil
   await expect(nav).toBeHidden();
 });
 
-test("links de WhatsApp e telefone são válidos (reais ou o fallback interno)", async ({ page }) => {
+test("não exibe links de contato enquanto os dados reais não estiverem cadastrados", async ({
+  page,
+}) => {
   await page.goto("./");
-  const waOk = new RegExp(`^(https://wa\\.me/55\\d{10,11}(\\?.*)?|${PREFIX}/consultas/)$`);
-  const telOk = new RegExp(`^(tel:\\+55\\d{10,11}|${PREFIX}/consultas/)$`);
 
-  const wa = await page.getByRole("link", { name: /WhatsApp/ }).all();
-  expect(wa.length).toBeGreaterThan(0);
-  for (const link of wa) await expect(link).toHaveAttribute("href", waOk);
+  await expect(
+    page.getByRole("link", { name: /WhatsApp/i }),
+  ).toHaveCount(0);
 
-  const tel = await page.getByRole("link", { name: "Ligar", exact: true }).all();
-  expect(tel.length).toBeGreaterThan(0);
-  for (const link of tel) await expect(link).toHaveAttribute("href", telOk);
+  await expect(
+    page.getByRole("link", { name: "Ligar", exact: true }),
+  ).toHaveCount(0);
 });
 
 test("nenhum link contém placeholder ou 'undefined'", async ({ page }) => {
   for (const p of pages) {
     await page.goto(p || "./");
+
     const hrefs = await page.locator("a[href]").evaluateAll((els) =>
       els.map((e) => e.getAttribute("href") ?? ""),
     );
+
     for (const href of hrefs) {
-      expect(href, `href suspeito em "${p}"`).not.toMatch(/PREENCHER|undefined|null/i);
+      expect(href, `href suspeito em "${p}"`).not.toMatch(
+        /PREENCHER|undefined|null/i,
+      );
     }
   }
 });
 
-test("barra de contato fixa aparece só no celular", async ({ page, isMobile }) => {
+test("não renderiza a barra de contato quando não há contatos cadastrados", async ({
+  page,
+}) => {
   await page.goto("./");
-  const bar = page.getByTestId("contact-bar");
-  if (isMobile) await expect(bar).toBeVisible();
-  else await expect(bar).toBeHidden();
+
+  await expect(page.getByTestId("contact-bar")).toHaveCount(0);
 });
 
 test("o primeiro Tab foca o link 'Ir para o conteúdo'", async ({ page }) => {
