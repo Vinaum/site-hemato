@@ -5,6 +5,7 @@ import {
   telUrl,
   whatsappUrl,
 } from "./contact";
+import { contact } from "@/content/site";
 
 describe("isPlaceholder", () => {
   it("detecta o marcador", () => {
@@ -81,5 +82,27 @@ describe("getContactLinks", () => {
       whatsappReady: true,
       phoneReady: true,
     });
+  });
+});
+describe("mensagem padrão do WhatsApp", () => {
+  it("sobrevive à codificação da URL, com acentos e pontuação", () => {
+    const url = whatsappUrl("5511999990000", contact.whatsappMessage);
+    expect(url).not.toBeNull();
+    const text = new URL(url as string).searchParams.get("text");
+    expect(text).toBe(contact.whatsappMessage);
+  });
+
+  it("não tem placeholder e tem tamanho razoável", () => {
+    expect(contact.whatsappMessage).not.toContain("PREENCHER");
+    expect(contact.whatsappMessage.length).toBeGreaterThan(20);
+    expect(contact.whatsappMessage.length).toBeLessThan(300);
+  });
+});
+
+describe("número de WhatsApp cadastrado", () => {
+  it("gera um link wa.me válido com a mensagem", () => {
+    const links = getContactLinks();
+    expect(links.whatsappReady).toBe(true);
+    expect(links.whatsapp).toMatch(/^https:\/\/wa\.me\/55\d{10,11}\?text=.+$/);
   });
 });

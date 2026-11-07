@@ -1,5 +1,8 @@
 import { doctor } from "@/content/site";
 import { expertise, home } from "@/content/pages";
+import { publications } from "@/content/publications";
+import { sortPublications } from "@/lib/publications";
+import PublicationItem from "@/components/ui/PublicationItem";
 import { getContactLinks } from "@/lib/contact";
 import { pageMetadata } from "@/lib/seo";
 import ButtonLink from "@/components/ui/ButtonLink";
@@ -16,6 +19,7 @@ export const metadata = pageMetadata({
 
 export default function Home() {
   const links = getContactLinks();
+  const latest = sortPublications(publications).slice(0, 3);
 
   return (
     <>
@@ -79,6 +83,30 @@ export default function Home() {
           </ButtonLink>
         </div>
       </Section>
+
+      {latest.length > 0 ? (
+        <Section tone="sage" labelledBy="publicacoes-titulo">
+          <SectionHeading
+            id="publicacoes-titulo"
+            title="Publicações científicas"
+            intro="Trabalhos mais recentes, com links para as fontes originais."
+          />
+          <ul className="grid gap-6 md:grid-cols-3">
+            {latest.map((p) => (
+              <li key={`${p.year}-${p.title}`}>
+                <Card>
+                  <PublicationItem publication={p} variant="compact" />
+                </Card>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-10">
+            <ButtonLink href="/publicacoes/" variant="secondary">
+              Ver todas as publicações
+            </ButtonLink>
+          </div>
+        </Section>
+      ) : null}
 
       <Section tone="surface" labelledBy="contato-titulo">
         <SectionHeading

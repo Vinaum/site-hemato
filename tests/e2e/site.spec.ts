@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { publications } from "../../src/content/publications";
 
 const PREFIX = "/site-hematologista";
 const pages = ["", "sobre/", "atuacao/", "publicacoes/", "consultas/", "privacidade/"];
@@ -124,4 +125,19 @@ test("imagens têm texto alternativo e carregam", async ({ page }) => {
         .toBeGreaterThan(0);
     }
   }
+});
+
+test("seção de publicações na inicial aparece só quando há publicações", async ({ page }) => {
+  await page.goto("./");
+  const heading = page.getByRole("heading", { name: "Publicações científicas" });
+
+  if (publications.length === 0) {
+    await expect(heading).toHaveCount(0);
+    return;
+  }
+
+  await expect(heading).toBeVisible();
+  await page.getByRole("link", { name: "Ver todas as publicações" }).click();
+  await expect(page).toHaveURL(/\/publicacoes\/$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Publicações científicas");
 });

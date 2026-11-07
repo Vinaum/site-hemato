@@ -41,6 +41,7 @@ export default function ButtonLink({
       {...(isWeb ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
       {children}
+      {isWeb ? <span className="sr-only"> (abre em uma nova aba)</span> : null}
     </a>
   );
 }

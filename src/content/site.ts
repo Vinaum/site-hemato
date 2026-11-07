@@ -18,8 +18,9 @@ export const doctor = {
 };
 
 export const contact = {
-  whatsapp: null as string | null,
-  whatsappMessage: "Olá, vim pelo site e gostaria de agendar uma consulta.",
+  whatsapp: "5518991061661" as string | null,
+  whatsappMessage:
+    "Olá, Dr. Marco Aurélio! Vim pelo site e gostaria de agendar uma consulta. Poderia me informar os horários disponíveis?",
   phone: null as string | null,
   phoneDisplay: null as string | null,
   email: null as string | null,
