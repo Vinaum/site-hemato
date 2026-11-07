@@ -9,6 +9,8 @@ Itens que dependem de dados reais ou de decisões do médico.
 - [ ] Foto profissional e versões otimizadas em `public/images/`
 - [ ] Política de privacidade (redigir na Fase 6, com revisão da LGPD)
 
+- [ ] Publicações científicas confirmadas pelo médico (`src/content/publications.ts`)
+
 ## Técnico
 - [ ] Dados estruturados (JSON-LD) com os dados reais
 - [ ] Imagem de compartilhamento (Open Graph) e favicon final

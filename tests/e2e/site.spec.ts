@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 
 const PREFIX = "/site-hematologista";
-const pages = ["", "sobre/", "atuacao/", "consultas/", "privacidade/"];
+const pages = ["", "sobre/", "atuacao/", "publicacoes/", "consultas/", "privacidade/"];
 
 async function openMenuIfMobile(page: Page) {
   const toggle = page.getByRole("button", { name: "Abrir menu" });
@@ -111,4 +111,17 @@ test("nenhum recurso falha ao carregar (CSS, JS, fontes, ícone)", async ({ page
   });
   for (const p of pages) await page.goto(p || "./", { waitUntil: "networkidle" });
   expect(bad).toEqual([]);
+});
+
+test("imagens têm texto alternativo e carregam", async ({ page }) => {
+  for (const p of pages) {
+    await page.goto(p || "./");
+    for (const img of await page.locator("img").all()) {
+      await img.scrollIntoViewIfNeeded();
+      await expect(img).toHaveAttribute("alt", /.+/);
+      await expect
+        .poll(() => img.evaluate((el: HTMLImageElement) => el.naturalWidth))
+        .toBeGreaterThan(0);
+    }
+  }
 });

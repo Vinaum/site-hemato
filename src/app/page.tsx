@@ -4,7 +4,7 @@ import { getContactLinks } from "@/lib/contact";
 import { pageMetadata } from "@/lib/seo";
 import ButtonLink from "@/components/ui/ButtonLink";
 import Card from "@/components/ui/Card";
-import PhotoPlaceholder from "@/components/ui/PhotoPlaceholder";
+import ProfilePhoto from "@/components/ui/ProfilePhoto";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -39,7 +39,11 @@ export default function Home() {
             </div>
           </div>
 
-          <PhotoPlaceholder className="mx-auto w-full max-w-sm md:max-w-none" />
+          <ProfilePhoto
+            priority
+            sizes="(min-width: 768px) 520px, 384px"
+            className="mx-auto max-w-sm md:max-w-none"
+          />
         </div>
       </Section>
 
@@ -50,7 +54,9 @@ export default function Home() {
           {expertise.map((area) => (
             <li key={area}>
               <Card>
-                <p className="font-serif text-xl text-primary-dark">{area}</p>
+                <div className="flex min-h-20 items-center justify-center text-center">
+                  <p className="font-serif text-xl text-primary-dark">{area}</p>
+                </div>
               </Card>
             </li>
           ))}

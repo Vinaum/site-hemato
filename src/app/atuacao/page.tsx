@@ -21,7 +21,9 @@ export default function AtuacaoPage() {
           {expertise.map((area) => (
             <li key={area}>
               <Card>
-                <p className="font-serif text-xl text-primary-dark">{area}</p>
+                <div className="flex min-h-20 items-center justify-center text-center">
+                  <p className="font-serif text-xl text-primary-dark">{area}</p>
+                </div>
               </Card>
             </li>
           ))}

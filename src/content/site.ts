@@ -1,3 +1,5 @@
+import { publications } from "./publications";
+
 /**
  * Dados centrais do site. Tudo que ainda não foi fornecido é placeholder.
  * Um teste de pré-publicação deve falhar se "[PREENCHER" restar no HTML final.
@@ -25,9 +27,15 @@ export const contact = {
   hours: null as string | null,
 };
 
-export const navItems = [
+const baseNav = [
   { href: "/", label: "Início" },
   { href: "/sobre/", label: "Sobre" },
   { href: "/atuacao/", label: "Atuação" },
   { href: "/consultas/", label: "Consultas" },
-] as const;
+];
+
+// "Publicações" só entra no menu quando houver ao menos uma publicação confirmada.
+export const navItems: { href: string; label: string }[] =
+  publications.length > 0
+    ? [...baseNav.slice(0, 3), { href: "/publicacoes/", label: "Publicações" }, ...baseNav.slice(3)]
+    : baseNav;

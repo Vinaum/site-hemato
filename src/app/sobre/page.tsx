@@ -2,7 +2,7 @@ import { doctor } from "@/content/site";
 import { about } from "@/content/pages";
 import { pageMetadata } from "@/lib/seo";
 import Card from "@/components/ui/Card";
-import PhotoPlaceholder from "@/components/ui/PhotoPlaceholder";
+import ProfilePhoto from "@/components/ui/ProfilePhoto";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -25,7 +25,7 @@ export default function SobrePage() {
               <p>{about.certification}</p>
             </div>
           </div>
-          <PhotoPlaceholder />
+          <ProfilePhoto sizes="(min-width: 768px) 320px, 100vw" />
         </div>
       </Section>
 
