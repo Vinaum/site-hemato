@@ -2,6 +2,7 @@ import { doctor } from "@/content/site";
 import { withBase } from "@/lib/site";
 
 const BASE = "/images/dr-marco-sartori";
+const WIDTHS = [480, 800];
 
 export default function ProfilePhoto({
   priority = false,
@@ -18,7 +19,7 @@ export default function ProfilePhoto({
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src(800)}
-      srcSet={`${src(480)} 480w, ${src(800)} 800w, ${src(1200)} 1200w`}
+      srcSet={WIDTHS.map((w) => `${src(w)} ${w}w`).join(", ")}
       sizes={sizes}
       width={800}
       height={1000}
