@@ -1,8 +1,14 @@
 import { expect, test, type Page } from "@playwright/test";
+import { contact } from "../../src/content/site";
 import { publications } from "../../src/content/publications";
 
 const PREFIX = "/site-hematologista";
 const pages = ["", "sobre/", "atuacao/", "publicacoes/", "consultas/", "privacidade/"];
+
+// Formato aceito pelos links: 55 + DDD + número, só dígitos.
+const BR_NUMBER = /^55\d{10,11}$/;
+const hasWhatsapp = BR_NUMBER.test(contact.whatsapp ?? "");
+const hasPhone = BR_NUMBER.test(contact.phone ?? "");
 
 async function openMenuIfMobile(page: Page) {
   const toggle = page.getByRole("button", { name: "Abrir menu" });
@@ -56,18 +62,31 @@ test("menu móvel abre, mostra os links e fecha com Esc", async ({ page, isMobil
   await expect(nav).toBeHidden();
 });
 
-test("não exibe links de contato enquanto os dados reais não estiverem cadastrados", async ({
-  page,
-}) => {
+test("links de contato seguem os dados cadastrados", async ({ page }) => {
   await page.goto("./");
 
-  await expect(
-    page.getByRole("link", { name: /WhatsApp/i }),
-  ).toHaveCount(0);
+  const wa = page.getByRole("link", { name: /WhatsApp/i });
+  if (hasWhatsapp) {
+    expect(await wa.count()).toBeGreaterThan(0);
+    for (const link of await wa.all()) {
+      await expect(link).toHaveAttribute(
+        "href",
+        new RegExp(`^https://wa\\.me/${contact.whatsapp}\\?text=.+$`),
+      );
+    }
+  } else {
+    await expect(wa).toHaveCount(0);
+  }
 
-  await expect(
-    page.getByRole("link", { name: "Ligar", exact: true }),
-  ).toHaveCount(0);
+  const tel = page.getByRole("link", { name: "Ligar", exact: true });
+  if (hasPhone) {
+    expect(await tel.count()).toBeGreaterThan(0);
+    for (const link of await tel.all()) {
+      await expect(link).toHaveAttribute("href", `tel:+${contact.phone}`);
+    }
+  } else {
+    await expect(tel).toHaveCount(0);
+  }
 });
 
 test("nenhum link contém placeholder ou 'undefined'", async ({ page }) => {
@@ -86,12 +105,18 @@ test("nenhum link contém placeholder ou 'undefined'", async ({ page }) => {
   }
 });
 
-test("não renderiza a barra de contato quando não há contatos cadastrados", async ({
-  page,
-}) => {
+test("barra de contato segue os dados e aparece só no celular", async ({ page, isMobile }) => {
   await page.goto("./");
+  const bar = page.getByTestId("contact-bar");
 
-  await expect(page.getByTestId("contact-bar")).toHaveCount(0);
+  if (!hasWhatsapp && !hasPhone) {
+    await expect(bar).toHaveCount(0);
+    return;
+  }
+
+  await expect(bar).toHaveCount(1);
+  if (isMobile) await expect(bar).toBeVisible();
+  else await expect(bar).toBeHidden();
 });
 
 test("o primeiro Tab foca o link 'Ir para o conteúdo'", async ({ page }) => {
