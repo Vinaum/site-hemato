@@ -24,8 +24,12 @@ export const contact = {
   phone: null as string | null,
   phoneDisplay: null as string | null,
   email: null as string | null,
-  address: null as string | null,
+  address: "Rua Domingos de Morais, 2781 - São Paulo, SP - 04035-001" as string | null,
   hours: null as string | null,
+  // Google Maps > Compartilhar > Incorporar um mapa (só o src do iframe).
+  mapEmbedUrl: null as string | null,
+  // Google Maps > Compartilhar > Enviar um link.
+  mapUrl: "https://www.google.com/maps/search/?api=1&query=Rua%20Domingos%20de%20Morais%2C%202781%2C%20S%C3%A3o%20Paulo%2C%20SP%2C%2004035-001" as string | null,
 };
 
 const baseNav = [

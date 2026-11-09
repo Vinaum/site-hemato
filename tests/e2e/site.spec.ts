@@ -166,3 +166,24 @@ test("seção de publicações na inicial aparece só quando há publicações",
   await expect(page).toHaveURL(/\/publicacoes\/$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Publicações científicas");
 });
+
+test("mapa só carrega depois do clique", async ({ page }) => {
+  const google: string[] = [];
+  page.on("request", (r) => {
+    if (/google\.com\/maps/.test(r.url())) google.push(r.url());
+  });
+  await page.goto("./");
+
+  const hasMap = !!contact.address && !!contact.mapEmbedUrl && !!contact.mapUrl;
+  const map = page.getByTestId("map-large");
+  if (!hasMap) {
+    await expect(map).toHaveCount(0);
+    return;
+  }
+
+  await expect(map.locator("iframe")).toHaveCount(0);
+  expect(google).toEqual([]);
+
+  await map.getByRole("button", { name: "Mostrar mapa" }).click();
+  await expect(map.locator("iframe")).toHaveAttribute("src", contact.mapEmbedUrl as string);
+});

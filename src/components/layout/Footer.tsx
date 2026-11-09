@@ -1,4 +1,6 @@
 import Link from "next/link";
+import MapEmbed from "@/components/ui/MapEmbed";
+import { mapReady } from "@/lib/maps";
 import { contact, doctor, navItems } from "@/content/site";
 import { getContactLinks } from "@/lib/contact";
 import Container from "@/components/ui/Container";
@@ -76,6 +78,14 @@ export default function Footer() {
           </ul>
         </nav>
       </Container>
+
+      {mapReady ? (
+        <Container className="pb-12">
+          <div className="max-w-sm">
+            <MapEmbed size="small" />
+          </div>
+        </Container>
+      ) : null}
 
       <div className="border-t border-bronze/50">
         <Container className="py-6 text-sm text-bronze-light">

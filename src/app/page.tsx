@@ -1,4 +1,6 @@
 import { doctor } from "@/content/site";
+import MapEmbed from "@/components/ui/MapEmbed";
+import { mapReady } from "@/lib/maps";
 import { expertise, home } from "@/content/pages";
 import { publications } from "@/content/publications";
 import { sortPublications } from "@/lib/publications";
@@ -109,30 +111,35 @@ export default function Home() {
       ) : null}
 
       <Section tone="surface" labelledBy="contato-titulo">
-        <SectionHeading
-          id="contato-titulo"
-          title="Agende sua consulta"
-          intro="Conheça as informações sobre atendimento e agendamento."
-        />
+        <div className={mapReady ? "grid items-start gap-10 md:grid-cols-2" : ""}>
+          <div>
+            <SectionHeading
+              id="contato-titulo"
+              title="Agende sua consulta"
+              intro="Conheça as informações sobre atendimento e agendamento."
+            />
 
-        <div className="flex flex-wrap gap-3">
-          {links.whatsappReady && links.whatsapp && (
-            <ButtonLink href={links.whatsapp}>
-              Agendar pelo WhatsApp
-            </ButtonLink>
-          )}
+            <div className="flex flex-wrap gap-3">
+              {links.whatsappReady && links.whatsapp && (
+                <ButtonLink href={links.whatsapp}>
+                  Agendar pelo WhatsApp
+                </ButtonLink>
+              )}
 
-          {links.phoneReady && links.phone && (
-            <ButtonLink href={links.phone} variant="secondary">
-              Ligar
-            </ButtonLink>
-          )}
+              {links.phoneReady && links.phone && (
+                <ButtonLink href={links.phone} variant="secondary">
+                  Ligar
+                </ButtonLink>
+              )}
 
-          {!links.whatsappReady && !links.phoneReady && (
-            <p className="text-ink">
-              Os canais de agendamento serão disponibilizados em breve.
-            </p>
-          )}
+              {!links.whatsappReady && !links.phoneReady && (
+                <p className="text-ink">
+                  Os canais de agendamento serão disponibilizados em breve.
+                </p>
+              )}
+            </div>
+          </div>
+          <MapEmbed size="large" />
         </div>
       </Section>
     </>
