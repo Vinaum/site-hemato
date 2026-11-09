@@ -77,21 +77,25 @@ export const institutions = [
   {
     name: "Instituto do Câncer do Estado de São Paulo",
     short: "ICESP",
+    logo: "icesp",
     url: "https://www.icesp.org.br/",
   },
   {
     name: "BP – A Beneficência Portuguesa de São Paulo",
     short: "BP",
+    logo: "bp",
     url: "https://www.bp.org.br/",
   },
   {
     name: "Rede D'Or",
     short: "Rede D'Or",
+    logo: "rede-dor",
     url: "https://www.rededorsaoluiz.com.br/",
   },
   {
     name: "Hospital das Clínicas da Faculdade de Medicina da USP",
     short: "HCFMUSP",
+    logo: "hcfmusp",
     url: "https://www.hc.fm.usp.br/",
   },
 ];

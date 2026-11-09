@@ -41,7 +41,7 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${inter.variable} ${fraunces.variable}`}
     >
-      <body className="pb-24 md:pb-0">
+      <body className="pb-24 md:pb-0" suppressHydrationWarning>
         <a
           href="#conteudo"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-surface"

@@ -144,7 +144,14 @@ test("imagens têm texto alternativo e carregam", async ({ page }) => {
     await page.goto(p || "./");
     for (const img of await page.locator("img").all()) {
       await img.scrollIntoViewIfNeeded();
-      await expect(img).toHaveAttribute("alt", /.+/);
+      const alt = await img.getAttribute("alt");
+      expect(alt, "toda imagem precisa do atributo alt").not.toBeNull();
+      if (alt === "") {
+        const insideNamedLink = await img.evaluate(
+          (el) => !!el.closest("a")?.textContent?.trim(),
+        );
+        expect(insideNamedLink, "alt vazio só em imagem decorativa dentro de link com texto").toBe(true);
+      }
       await expect
         .poll(() => img.evaluate((el: HTMLImageElement) => el.naturalWidth))
         .toBeGreaterThan(0);
