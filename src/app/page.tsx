@@ -1,4 +1,5 @@
 import { doctor } from "@/content/site";
+import Institutions from "@/components/sections/Institutions";
 import MapEmbed from "@/components/ui/MapEmbed";
 import { mapReady } from "@/lib/maps";
 import { expertise, home } from "@/content/pages";
@@ -85,6 +86,8 @@ export default function Home() {
           </ButtonLink>
         </div>
       </Section>
+
+      <Institutions />
 
       {latest.length > 0 ? (
         <Section tone="sage" labelledBy="publicacoes-titulo">

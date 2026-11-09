@@ -71,3 +71,27 @@ export const privacySections = [
   "Seus direitos (LGPD)",
   "Contato do responsável",
 ] as const;
+
+/** Vínculos institucionais: nomes em texto, sem logotipos (marcas de terceiros). */
+export const institutions = [
+  {
+    name: "Instituto do Câncer do Estado de São Paulo",
+    short: "ICESP",
+    url: "https://www.icesp.org.br/",
+  },
+  {
+    name: "BP – A Beneficência Portuguesa de São Paulo",
+    short: "BP",
+    url: "https://www.bp.org.br/",
+  },
+  {
+    name: "Rede D'Or",
+    short: "Rede D'Or",
+    url: "https://www.rededorsaoluiz.com.br/",
+  },
+  {
+    name: "Hospital das Clínicas da Faculdade de Medicina da USP",
+    short: "HCFMUSP",
+    url: "https://www.hc.fm.usp.br/",
+  },
+];

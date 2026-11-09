@@ -187,3 +187,18 @@ test("mapa só carrega depois do clique", async ({ page }) => {
   await map.getByRole("button", { name: "Mostrar mapa" }).click();
   await expect(map.locator("iframe")).toHaveAttribute("src", contact.mapEmbedUrl as string);
 });
+
+test("vínculos institucionais: blocos com links externos", async ({ page }) => {
+  await page.goto("./");
+  const section = page.locator("section", {
+    has: page.getByRole("heading", { name: "Vínculos institucionais" }),
+  });
+  await expect(section).toBeVisible();
+
+  const links = section.getByRole("link");
+  await expect(links).toHaveCount(4);
+  for (const link of await links.all()) {
+    await expect(link).toHaveAttribute("href", /^https:\/\//);
+    await expect(link).toHaveAttribute("target", "_blank");
+  }
+});
