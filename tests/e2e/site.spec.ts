@@ -223,3 +223,12 @@ test("HemoView na inicial: canal e vídeo em destaque", async ({ page }) => {
     /^https:\/\/www\.youtube-nocookie\.com\/embed\/if2LETcdb8g/,
   );
 });
+
+test("ícone do site está declarado e carrega", async ({ page }) => {
+  await page.goto("./");
+  const href = await page.locator('link[rel="icon"]').first().getAttribute("href");
+  expect(href, "nenhum <link rel=icon> na página").not.toBeNull();
+  expect(href).toContain(PREFIX);
+  const res = await page.request.get(new URL(href as string, page.url()).toString());
+  expect(res.status()).toBe(200);
+});
