@@ -208,3 +208,18 @@ test("vínculos institucionais: blocos com links externos", async ({ page }) => 
     await expect(link).toHaveAttribute("target", "_blank");
   }
 });
+
+test("HemoView na inicial: canal e vídeo em destaque", async ({ page }) => {
+  await page.goto("./");
+  const heading = page.getByRole("heading", { name: "HemoView" });
+  await expect(heading).toBeVisible();
+
+  await expect(page.getByRole("link", { name: /Ver o canal no YouTube/ })).toHaveAttribute(
+    "href",
+    "https://www.youtube.com/@PodcastHemoview",
+  );
+  await expect(page.getByTestId("hemoview-video").locator("iframe")).toHaveAttribute(
+    "src",
+    /^https:\/\/www\.youtube-nocookie\.com\/embed\/if2LETcdb8g/,
+  );
+});

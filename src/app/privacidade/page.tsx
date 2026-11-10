@@ -112,7 +112,23 @@ export default function PrivacidadePage() {
           </p>
         </Block>
 
-        <Block title="6. Seus direitos">
+        <Block title="6. Vídeo do YouTube">
+          <p>
+            A página inicial exibe um vídeo do canal HemoView, incorporado no modo de
+            privacidade aprimorada do YouTube. O vídeo é carregado quando a área em que
+            ele aparece se aproxima da parte visível da tela. Nesse momento, o seu
+            navegador se conecta aos servidores do YouTube, serviço do Google, que
+            recebem dados como o seu endereço IP e informações do navegador. Ao
+            reproduzir o vídeo, o YouTube pode usar cookies e registrar informações
+            sobre a reprodução, conforme a{" "}
+            <External href="https://policies.google.com/privacy?hl=pt-BR">
+              política de privacidade do Google
+            </External>
+            .
+          </p>
+        </Block>
+
+        <Block title="7. Seus direitos">
           <p>A LGPD garante a você, entre outros direitos:</p>
           <ul className="list-disc space-y-2 pl-6">
             <li>confirmar se existe tratamento dos seus dados;</li>
@@ -124,12 +140,12 @@ export default function PrivacidadePage() {
           </ul>
           <p>
             Para exercer esses direitos, entre em contato pelos canais informados neste
-            site. Dados tratados diretamente pelo GitHub, pela Meta ou pelo Google também
+            site. Dados tratados diretamente pelo GitHub, pela Meta ou pelo Google (incluindo o YouTube) também
             podem ser solicitados a essas empresas.
           </p>
         </Block>
 
-        <Block title="7. Segurança">
+        <Block title="8. Segurança">
           <p>
             O site é servido por conexão segura (HTTPS) e não armazena dados de
             visitantes. As medidas de segurança são revistas quando o site muda.
@@ -137,7 +153,7 @@ export default function PrivacidadePage() {
           </p>
         </Block>
 
-        <Block title="8. Atualizações desta política">
+        <Block title="9. Atualizações desta política">
           <p>
             Esta política será atualizada sempre que o site passar a usar novos serviços
             ou funcionalidades.

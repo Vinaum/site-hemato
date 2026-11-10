@@ -1,4 +1,5 @@
 import { doctor } from "@/content/site";
+import Hemoview from "@/components/sections/Hemoview";
 import Institutions from "@/components/sections/Institutions";
 import MapEmbed from "@/components/ui/MapEmbed";
 import { mapReady } from "@/lib/maps";
@@ -112,6 +113,8 @@ export default function Home() {
           </div>
         </Section>
       ) : null}
+
+      <Hemoview />
 
       <Section tone="surface" labelledBy="contato-titulo">
         <div className={mapReady ? "grid items-start gap-10 md:grid-cols-2" : ""}>

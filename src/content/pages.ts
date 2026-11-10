@@ -99,3 +99,21 @@ export const institutions = [
     url: "https://www.hc.fm.usp.br/",
   },
 ];
+
+/** HemoView: divulgação científica para profissionais de saúde. */
+export const hemoview = {
+  name: "HemoView",
+  title: "Linfomas T Nodais: Diagnóstico e Novas Terapias feat. Dr. Guilherme Carneiro | HemoView #25" as string | null,
+  role: "Cofundador e apresentador",
+  channelUrl: "https://www.youtube.com/@PodcastHemoview",
+  description:
+    "Podcast e canal no YouTube criado por médicos hematologistas formados pela USP, com discussões baseadas em evidências sobre hematologia clínica e laboratorial, casos clínicos e atualizações terapêuticas. O conteúdo é voltado a profissionais de saúde.",
+  featured: {
+    /** Identificador do vídeo (o código após "watch?v=" no link). */
+    id: "if2LETcdb8g",
+    /** Título do episódio, exatamente como no YouTube. */
+    title: null as string | null,
+    /** Segundo em que o vídeo começa (0 = início). */
+    start: 0,
+  },
+};
