@@ -133,9 +133,10 @@ test("página inexistente devolve 404", async ({ page }) => {
 test("nenhum recurso falha ao carregar (CSS, JS, fontes, ícone)", async ({ page }) => {
   const bad: string[] = [];
   page.on("response", (r) => {
-    if (r.status() >= 400) bad.push(`${r.status()} ${r.url()}`);
+    const local = new URL(r.url()).hostname === "localhost";
+    if (local && r.status() >= 400) bad.push(`${r.status()} ${r.url()}`);
   });
-  for (const p of pages) await page.goto(p || "./", { waitUntil: "networkidle" });
+  for (const p of pages) await page.goto(p || "./", { waitUntil: "load" });
   expect(bad).toEqual([]);
 });
 
@@ -174,25 +175,23 @@ test("seção de publicações na inicial aparece só quando há publicações",
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Publicações científicas");
 });
 
-test("mapa só carrega depois do clique", async ({ page }) => {
-  const google: string[] = [];
-  page.on("request", (r) => {
-    if (/google\.com\/maps/.test(r.url())) google.push(r.url());
-  });
+test("mapa do consultório aparece com o endereço cadastrado", async ({ page }) => {
   await page.goto("./");
-
   const hasMap = !!contact.address && !!contact.mapEmbedUrl && !!contact.mapUrl;
   const map = page.getByTestId("map-large");
+
   if (!hasMap) {
     await expect(map).toHaveCount(0);
     return;
   }
 
-  await expect(map.locator("iframe")).toHaveCount(0);
-  expect(google).toEqual([]);
-
-  await map.getByRole("button", { name: "Mostrar mapa" }).click();
-  await expect(map.locator("iframe")).toHaveAttribute("src", contact.mapEmbedUrl as string);
+  const iframe = map.locator("iframe");
+  await expect(iframe).toHaveAttribute("src", contact.mapEmbedUrl as string);
+  await expect(iframe).toHaveAttribute("title", /Mapa/);
+  await expect(map.getByRole("link", { name: /Abrir no Google Maps/ })).toHaveAttribute(
+    "href",
+    contact.mapUrl as string,
+  );
 });
 
 test("vínculos institucionais: blocos com links externos", async ({ page }) => {

@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
   path: "/privacidade/",
 });
 
-const UPDATED = "8 de novembro de 2026";
+const UPDATED = "9 de novembro de 2026";
 
 function External({ href, children }: { href: string; children: ReactNode }) {
   return (
@@ -99,14 +99,16 @@ export default function PrivacidadePage() {
 
         <Block title="5. Mapa do Google">
           <p>
-            O mapa com a localização do consultório só é carregado se você clicar em
-            &quot;Mostrar mapa&quot;. A partir desse clique, o Google recebe dados como o
-            seu endereço IP e informações do navegador, e pode usar cookies, conforme a{" "}
+            O mapa com a localização do consultório é fornecido pelo Google e é
+            carregado quando a área em que ele aparece se aproxima da parte visível da
+            tela. Nesse momento, o seu navegador se conecta aos servidores do Google,
+            que recebem dados como o seu endereço IP e informações do navegador e podem
+            usar cookies, conforme a{" "}
             <External href="https://policies.google.com/privacy?hl=pt-BR">
               política de privacidade do Google
             </External>
-            . O mesmo vale para o link &quot;Abrir no Google Maps&quot;. Sem o clique,
-            nenhum dado é enviado ao Google pelo site.
+            . O link &quot;Abrir no Google Maps&quot; leva diretamente ao serviço do
+            Google.
           </p>
         </Block>
 
