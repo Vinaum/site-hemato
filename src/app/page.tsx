@@ -1,9 +1,10 @@
 import { doctor } from "@/content/site";
+import PracticeAreas from "@/components/sections/PracticeAreas";
 import Hemoview from "@/components/sections/Hemoview";
 import Institutions from "@/components/sections/Institutions";
 import MapEmbed from "@/components/ui/MapEmbed";
 import { mapReady } from "@/lib/maps";
-import { expertise, home } from "@/content/pages";
+import { home } from "@/content/pages";
 import { publications } from "@/content/publications";
 import { sortPublications } from "@/lib/publications";
 import PublicationItem from "@/components/ui/PublicationItem";
@@ -57,22 +58,10 @@ export default function Home() {
 
       <Section tone="sage" labelledBy="atuacao-titulo">
         <SectionHeading id="atuacao-titulo" title="Áreas de atuação" />
-
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {expertise.map((area) => (
-            <li key={area}>
-              <Card>
-                <div className="flex min-h-20 items-center justify-center text-center">
-                  <p className="font-serif text-xl text-primary-dark">{area}</p>
-                </div>
-              </Card>
-            </li>
-          ))}
-        </ul>
-
+        <PracticeAreas variant="summary" />
         <div className="mt-10">
           <ButtonLink href="/atuacao/" variant="secondary">
-            Ver condições acompanhadas
+            Ver áreas de atuação
           </ButtonLink>
         </div>
       </Section>

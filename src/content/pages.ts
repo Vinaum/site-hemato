@@ -37,26 +37,28 @@ export const about = {
   ],
 };
 
-export const expertise = [
-  "Hematologia",
-  "Hemoterapia",
-  "Onco-hematologia",
-  "Clínica Médica",
-];
+export type PracticeArea = { title: string; items: string[] };
 
-export const focusAreas = [
-  "Anemias",
-  "Plaquetas baixas (plaquetopenias)",
-  "Diminuição dos glóbulos brancos",
-  "Aumento de linfonodos (ínguas)",
-  "Aumento dos glóbulos vermelhos (eritrocitose)",
-  "Alterações no ferro e ferritina",
-  "Distúrbios de sangramento",
-  "Tromboses",
-  "Trombofilias",
-  "Mieloma múltiplo",
-  "Leucemias",
-  "Linfomas",
+/** Áreas de atuação agrupadas. Validar os grupos com o médico. */
+export const practiceAreas: PracticeArea[] = [
+  {
+    title: "Alterações do sangue",
+    items: [
+      "Anemias",
+      "Plaquetas baixas (plaquetopenias)",
+      "Diminuição dos glóbulos brancos",
+      "Aumento dos glóbulos vermelhos (eritrocitose)",
+      "Alterações no ferro e ferritina",
+    ],
+  },
+  {
+    title: "Coagulação e trombose",
+    items: ["Distúrbios de sangramento", "Tromboses", "Trombofilias"],
+  },
+  {
+    title: "Onco-hematologia",
+    items: ["Leucemias", "Linfomas", "Mieloma múltiplo", "Aumento de linfonodos (ínguas)"],
+  },
 ];
 
 export const consultations = {
