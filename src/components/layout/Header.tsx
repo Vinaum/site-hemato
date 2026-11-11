@@ -7,6 +7,7 @@ import { doctor, navItems } from "@/content/site";
 import { getContactLinks } from "@/lib/contact";
 import ButtonLink from "@/components/ui/ButtonLink";
 import Container from "@/components/ui/Container";
+import { withBase } from "@/lib/site";
 
 export default function Header() {
   const pathname = usePathname();
@@ -30,9 +31,19 @@ export default function Header() {
       <Container className="relative flex h-18 items-center justify-between gap-4">
         <Link
           href="/"
-          className="font-serif text-lg font-semibold leading-tight text-primary-dark md:text-xl"
+          className="shrink-0 rounded-md"
+          onClick={() => setOpen(false)}
         >
-          {doctor.name}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={withBase("/images/marca/logo-2x.webp")}
+            srcSet={`${withBase("/images/marca/logo-2x.webp")} 2x, ${withBase("/images/marca/logo-3x.webp")} 3x`}
+            width={199}
+            height={44}
+            alt={`${doctor.name}, página inicial`}
+            fetchPriority="high"
+            className="h-10 w-auto md:h-11"
+          />
         </Link>
 
         <nav

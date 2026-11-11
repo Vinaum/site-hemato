@@ -232,3 +232,17 @@ test("ícone do site está declarado e carrega", async ({ page }) => {
   const res = await page.request.get(new URL(href as string, page.url()).toString());
   expect(res.status()).toBe(200);
 });
+
+test("logomarca no cabeçalho leva à página inicial em todas as páginas", async ({ page }) => {
+  for (const p of pages) {
+    await page.goto(p || "./");
+    const logo = page.getByRole("banner").getByRole("link", { name: /página inicial/ });
+    await expect(logo).toBeVisible();
+    await expect
+      .poll(() => logo.locator("img").evaluate((el: HTMLImageElement) => el.naturalWidth))
+      .toBeGreaterThan(0);
+  }
+  await page.goto("sobre/");
+  await page.getByRole("banner").getByRole("link", { name: /página inicial/ }).click();
+  await expect(page).toHaveURL(new RegExp(`${PREFIX}/$`));
+});
