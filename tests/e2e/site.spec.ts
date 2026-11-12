@@ -255,7 +255,7 @@ test("foto do topo: primeira foto visível e navegação quando houver mais de u
   await expect(first).toBeVisible();
   await expect.poll(() => first.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
 
-  const next = carousel.getByRole("button", { name: "Próxima foto" });
+  const next = carousel.getByRole("button", { name: /Mostrar foto 2/ });
   if (heroPhotos.length < 2) {
     await expect(next).toHaveCount(0);
     return;
