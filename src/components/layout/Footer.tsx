@@ -23,7 +23,7 @@ function instagramHandle(url: string | null): string | null {
 
 const heading = "font-serif text-lg text-surface";
 const label = "block text-xs font-medium uppercase tracking-wider text-surface";
-const link = "underline underline-offset-4 hover:text-surface";
+const link = "transition-colors hover:text-surface";
 
 export default function Footer() {
   const links = getContactLinks();
@@ -73,7 +73,7 @@ export default function Footer() {
               className="h-14 w-auto md:h-16"
             />
           </h2>
-          <p className="mt-4">MÉDICO · {doctor.crm}</p>
+          <p className="mt-4 text-sm">Médico · {doctor.crm}</p>
           <ul className="mt-1 text-sm">
             {doctor.specialties.map((s) => (
               <li key={s.rqe}>
