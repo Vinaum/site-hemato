@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { heroPhotos } from "../../src/content/pages";
 import { contact } from "../../src/content/site";
 import { publications } from "../../src/content/publications";
 
@@ -245,4 +246,20 @@ test("logomarca no cabeçalho leva à página inicial em todas as páginas", asy
   await page.goto("sobre/");
   await page.getByRole("banner").getByRole("link", { name: /página inicial/ }).click();
   await expect(page).toHaveURL(new RegExp(`${PREFIX}/$`));
+});
+
+test("foto do topo: primeira foto visível e navegação quando houver mais de uma", async ({ page }) => {
+  await page.goto("./");
+  const carousel = page.getByRole("region", { name: /Fotos do/ });
+  const first = carousel.locator("img").first();
+  await expect(first).toBeVisible();
+  await expect.poll(() => first.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
+
+  const next = carousel.getByRole("button", { name: "Próxima foto" });
+  if (heroPhotos.length < 2) {
+    await expect(next).toHaveCount(0);
+    return;
+  }
+  await next.click();
+  await expect(carousel.locator('[aria-roledescription="slide"]').nth(1)).toHaveAttribute("aria-hidden", "false");
 });

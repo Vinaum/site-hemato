@@ -27,7 +27,7 @@ export default function Header() {
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-background/95 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-line bg-background/75 backdrop-blur">
       <Container className="relative flex h-18 items-center justify-between gap-4">
         <Link
           href="/"

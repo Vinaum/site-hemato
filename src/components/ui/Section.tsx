@@ -5,6 +5,7 @@ const tones = {
   default: "",
   sage: "bg-sage",
   surface: "bg-surface",
+  sand: "bg-sand",
 } as const;
 
 export default function Section({

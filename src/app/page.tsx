@@ -1,4 +1,5 @@
 import { doctor } from "@/content/site";
+import HeroCarousel from "@/components/sections/HeroCarousel";
 import PracticeAreas from "@/components/sections/PracticeAreas";
 import Hemoview from "@/components/sections/Hemoview";
 import Institutions from "@/components/sections/Institutions";
@@ -12,7 +13,6 @@ import { getContactLinks } from "@/lib/contact";
 import { pageMetadata } from "@/lib/seo";
 import ButtonLink from "@/components/ui/ButtonLink";
 import Card from "@/components/ui/Card";
-import ProfilePhoto from "@/components/ui/ProfilePhoto";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <>
-      <Section>
+      <Section tone="sand">
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div>
             <p className="font-medium text-primary">{home.kicker}</p>
@@ -48,11 +48,7 @@ export default function Home() {
             </div>
           </div>
 
-          <ProfilePhoto
-            priority
-            sizes="(min-width: 768px) 520px, 384px"
-            className="mx-auto max-w-sm md:max-w-none"
-          />
+          <HeroCarousel />
         </div>
       </Section>
 

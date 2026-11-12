@@ -119,3 +119,21 @@ export const hemoview = {
     start: 0,
   },
 };
+
+export type HeroPhoto = {
+  /** Caminho sem a largura: os arquivos são <base>-<largura>.webp em public/. */
+  base: string;
+  /** Larguras disponíveis, em pixels. */
+  widths: number[];
+  /** Descrição da foto para leitores de tela. */
+  alt: string;
+};
+
+/** Fotos do topo da página inicial. Com uma só, o carrossel fica parado. */
+export const heroPhotos: HeroPhoto[] = [
+  {
+    base: "/images/dr-marco-sartori",
+    widths: [480, 800],
+    alt: "Retrato do Dr. Marco Aurélio Sartori",
+  },
+];
