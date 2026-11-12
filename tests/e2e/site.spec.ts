@@ -263,3 +263,11 @@ test("foto do topo: primeira foto visível e navegação quando houver mais de u
   await next.click();
   await expect(carousel.locator('[aria-roledescription="slide"]').nth(1)).toHaveAttribute("aria-hidden", "false");
 });
+
+test("logomarca no rodapé com o nome do médico como texto alternativo", async ({ page }) => {
+  await page.goto("./");
+  const logo = page.getByRole("contentinfo").getByRole("img", { name: /Marco Aurélio/ });
+  await logo.scrollIntoViewIfNeeded();
+  await expect(logo).toBeVisible();
+  await expect.poll(() => logo.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
+});

@@ -4,6 +4,7 @@ import { mapReady } from "@/lib/maps";
 import { contact, doctor, navItems } from "@/content/site";
 import { getContactLinks } from "@/lib/contact";
 import Container from "@/components/ui/Container";
+import { withBase } from "@/lib/site";
 
 export default function Footer() {
   const links = getContactLinks();
@@ -13,7 +14,19 @@ export default function Footer() {
     <footer className="mt-24 bg-primary-dark text-surface">
       <Container className="grid gap-10 py-14 md:grid-cols-3">
         <div>
-          <h2 className="font-serif text-xl text-surface">{doctor.name}</h2>
+          <h2>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={withBase("/images/marca/logo-claro-2x.webp")}
+              srcSet={`${withBase("/images/marca/logo-claro-2x.webp")} 2x, ${withBase("/images/marca/logo-claro-3x.webp")} 2.5x`}
+              width={233}
+              height={52}
+              alt={doctor.name}
+              loading="lazy"
+              decoding="async"
+              className="h-12 w-auto md:h-13"
+            />
+          </h2>
           <p className="mt-3 text-bronze-light">MÉDICO · {doctor.crm}</p>
           <ul className="mt-1 text-bronze-light">
             {doctor.specialties.map((s) => (
