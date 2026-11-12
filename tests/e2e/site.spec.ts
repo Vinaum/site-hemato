@@ -271,3 +271,16 @@ test("logomarca no rodapé com o nome do médico como texto alternativo", async 
   await expect(logo).toBeVisible();
   await expect.poll(() => logo.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
 });
+
+test("rodapé em duas áreas: menu em linha, contato e endereço", async ({ page }) => {
+  await page.goto("./");
+  const footer = page.getByRole("contentinfo");
+  await expect(footer.getByRole("navigation", { name: "Rodapé" }).getByRole("link")).not.toHaveCount(0);
+  await expect(footer.getByRole("heading", { name: "Navegação" })).toHaveCount(0);
+  await expect(footer.getByRole("heading", { name: "Contato" })).toBeVisible();
+  if (contact.address) {
+    await expect(footer.getByRole("heading", { name: "Endereço" })).toBeVisible();
+    await expect(footer.getByText(contact.address)).toBeVisible();
+  }
+  await expect(footer.getByText(/CRM-SP/)).toBeVisible();
+});

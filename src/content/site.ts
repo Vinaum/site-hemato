@@ -24,6 +24,8 @@ export const contact = {
   phone: null as string | null,
   phoneDisplay: null as string | null,
   email: null as string | null,
+  // Endereço completo do perfil, ex.: https://www.instagram.com/usuario/
+  instagram: null as string | null,
   address: "Rua Domingos de Morais, 2781 - São Paulo, SP - 04035-001" as string | null,
   hours: null as string | null,
   // Google Maps > Compartilhar > Incorporar um mapa (só o src do iframe).
