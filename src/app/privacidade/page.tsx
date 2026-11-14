@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
   path: "/privacidade/",
 });
 
-const UPDATED = "9 de novembro de 2026";
+const UPDATED = "14 de novembro de 2026";
 
 function External({ href, children }: { href: string; children: ReactNode }) {
   return (
@@ -59,6 +59,12 @@ export default function PrivacidadePage() {
             análise de comportamento ou de publicidade. Ele não cria cookies próprios.
             As fontes tipográficas são hospedadas no próprio site, sem consulta a
             serviços externos.
+          </p>
+          <p>
+            A única área com login é a administrativa, usada pelo responsável para
+            atualizar as informações do site. Ela guarda a sessão no navegador de quem
+            a acessa e não se aplica aos visitantes. Os dados de acesso dos
+            administradores e o conteúdo editável são armazenados no Supabase.
           </p>
         </Block>
 

@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { parseContactInfo, readSnapshot, withRemoteContact, type ContactInfo } from "./content";
+import {
+  contactToForm,
+  formToContact,
+  parseContactInfo,
+  readSnapshot,
+  validateContact,
+  withRemoteContact,
+  type ContactInfo,
+} from "./content";
 
 const valid: ContactInfo = {
   whatsapp: "5518991061661",
@@ -55,5 +63,23 @@ describe("withRemoteContact", () => {
   it("mantém os valores do código quando o banco está vazio ou inválido", () => {
     expect(withRemoteContact(defaults, "{}")).toEqual(defaults);
     expect(withRemoteContact(defaults, JSON.stringify({ contact_info: { whatsapp: "1" } }))).toEqual(defaults);
+  });
+});
+
+describe("formulário do painel", () => {
+  it("converte ida e volta sem perder dados", () => {
+    expect(formToContact(contactToForm(valid))).toEqual(valid);
+  });
+
+  it("texto vazio vira null e números perdem a formatação", () => {
+    const form = { ...contactToForm(valid), whatsapp: "+55 (18) 99106-1661", hours: "   " };
+    const c = formToContact(form);
+    expect(c.whatsapp).toBe("5518991061661");
+    expect(c.hours).toBeNull();
+  });
+
+  it("aponta o erro no campo certo", () => {
+    const errors = validateContact({ ...valid, email: "x", whatsappMessage: " " });
+    expect(Object.keys(errors).sort()).toEqual(["email", "whatsappMessage"]);
   });
 });

@@ -284,3 +284,14 @@ test("rodapé em duas áreas: menu em linha, contato e endereço", async ({ page
   }
   await expect(footer.getByText(/CRM-SP/)).toBeVisible();
 });
+
+test("área administrativa: não indexada e sem dados sem login", async ({ page }) => {
+  const res = await page.goto("admin/login/");
+  expect(res?.status()).toBe(200);
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Área administrativa");
+
+  await page.goto("admin/");
+  await page.waitForLoadState("networkidle");
+  await expect(page.getByLabel("WhatsApp", { exact: true })).toHaveCount(0);
+});
