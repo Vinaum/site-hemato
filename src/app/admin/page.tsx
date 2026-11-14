@@ -134,7 +134,7 @@ export default function AdminPage() {
     }
     setUpdatedAt(data.updated_at);
     setForm(contactToForm(value));
-    setNotice({ kind: "ok", text: "Alterações salvas. O site público mostra os novos dados a partir da próxima publicação." });
+    setNotice({ kind: "ok", text: "Alterações salvas. O site público é atualizado em alguns minutos." });
   }
 
   async function signOut() {

@@ -13,6 +13,10 @@ on:
         description: "Publicar mesmo com [PREENCHER] (somente pré-visualização)"
         type: boolean
         default: false
+      content_only:
+        description: "Só conteúdo mudou (disparo do painel): pula os testes de código"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -27,6 +31,7 @@ env:
 jobs:
   verify:
     name: Qualidade e testes
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && !inputs.content_only)
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -63,6 +68,7 @@ jobs:
   build:
     name: Build de produção
     needs: verify
+    if: ${{ !cancelled() && (needs.verify.result == 'success' || needs.verify.result == 'skipped') }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
