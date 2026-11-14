@@ -1,4 +1,5 @@
 import { publications } from "./publications";
+import { withRemoteContact } from "@/lib/content";
 
 /**
  * Dados centrais do site. Tudo que ainda não foi fornecido é placeholder.
@@ -17,7 +18,8 @@ export const doctor = {
   ],
 };
 
-export const contact = {
+/** Valores padrão; os do Supabase os substituem na publicação. */
+const contactDefaults = {
   whatsapp: "5518991061661" as string | null,
   whatsappMessage:
     "Olá, Dr. Marco Aurélio! Vim pelo site e gostaria de agendar uma consulta. Poderia me informar os horários disponíveis?",
@@ -34,6 +36,9 @@ export const contact = {
   // Google Maps > Compartilhar > Enviar um link.
   mapUrl: "https://www.google.com/maps/search/?api=1&query=Rua%20Domingos%20de%20Morais%2C%202781%2C%20S%C3%A3o%20Paulo%2C%20SP%2C%2004035-001" as string | null,
 };
+
+export const contact = withRemoteContact(contactDefaults);
+
 
 const baseNav = [
   { href: "/", label: "Início" },

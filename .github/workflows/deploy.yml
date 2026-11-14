@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  # Duas publicações diárias: atualizam o conteúdo e mantêm o Supabase ativo.
+  schedule:
+    - cron: "17 9,21 * * *"
   workflow_dispatch:
     inputs:
       allow_placeholders:
@@ -81,6 +84,8 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: /site-hemato
           NEXT_PUBLIC_SITE_URL: https://vinaum.github.io/site-hemato
           NEXT_PUBLIC_ALLOW_INDEXING: "false"
+          NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
 
       - name: Bloquear publicação com placeholders
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.allow_placeholders) }}
